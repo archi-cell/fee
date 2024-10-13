@@ -1,0 +1,180 @@
+html,
+body {
+  height: 100%;
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(
+    135deg,
+    #a1c4fd,
+    #c2e9fb
+  ); /* Blue gradient background */
+  background-size: 400% 400%; /* Smooth animation */
+  color: #333; /* Darker text for contrast */
+  margin: 0;
+  padding: 0;
+  animation: gradientBackground 15s ease infinite; /* Animate the gradient */
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  text-align: center;
+  background: rgba(
+    255,
+    255,
+    255,
+    0.95
+  ); /* Slightly less transparent white background */
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2); /* Deeper shadow for more separation */
+  padding: 20px;
+}
+
+header {
+  margin-bottom: 30px;
+}
+
+header h1 {
+  font-size: 2.5em;
+  color: #ff6f61; /* Vibrant coral color */
+  margin: 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15); /* Subtle text shadow for depth */
+}
+
+.calendar {
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Enhanced shadow for better separation */
+  width: 100%;
+  max-width: 600px; /* Adjust based on your preferred max width */
+}
+
+.calendar-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  background: linear-gradient(
+    135deg,
+    #ff6f61,
+    #ffbe76
+  ); /* Gradient for control bar */
+  color: #fff;
+  border-bottom: 3px solid #ff3d00; /* Strong border for separation */
+}
+
+button {
+  background: #fff;
+  border: 1px solid #ff6f61; /* Coral color border */
+  color: #ff6f61;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s, border-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+  background: #ff6f61;
+  color: #fff;
+  transform: scale(1.05); /* Slightly enlarge button on hover */
+}
+
+button:disabled {
+  background: #f0f0f0;
+  border: 1px solid #ddd;
+  color: #aaa;
+  cursor: not-allowed;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 12px;
+  text-align: center;
+  vertical-align: middle;
+  border: 1px solid #eee;
+}
+
+td {
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s, transform 0.2s;
+  border-radius: 12px;
+}
+
+td:hover:not(.disabled) {
+  background-color: #ffecb3; /* Light yellow background on hover */
+  transform: scale(1.02); /* Slightly enlarge cell on hover */
+}
+
+td.disabled {
+  color: #ccc;
+  cursor: not-allowed;
+  background-color: #f9f9f9;
+}
+
+td.selected {
+  border: 2px solid #ff6f61; /* Coral color border for selected date */
+  background-color: #ffe0e0; /* Light coral background for selected date */
+  color: #ff6f61; /* Text color matching the border */
+  font-weight: bold;
+}
+
+.proceed-btn {
+  margin-top: 30px;
+  background: #ff6f61;
+  border: 1px solid #ff6f61;
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s, transform 0.2s;
+  font-size: 1.1em;
+}
+
+.proceed-btn:hover {
+  background: #ff3d00;
+  border-color: #ff3d00;
+  transform: scale(1.05); /* Slightly enlarge button on hover */
+}
+
+/* Animations */
+@keyframes gradientBackground {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+
+.booked {
+  background-color: #ff9999;
+  color: white;
+}
+
+.proceed-btn {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.proceed-btn:hover {
+  background-color: #45a049;
+}
+

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Now - Event Booking</title>
+    <link rel="stylesheet" href="book.css">
+</head>
+<body>
+    <div class="booking-container">
+        <h1>Book Your Event Now!</h1>
+
+        <form id="booking-form">
+            <!-- User Information -->
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="date">Event Date:</label>
+                <input type="date" id="date" name="date" required>
+            </div>
+
+            <!-- Ticket Selection -->
+            <div class="form-group">
+                <label for="ticket-type">Ticket Type:</label>
+                <select id="ticket-type" name="ticket-type" required>
+                    <option value="" disabled selected>Select ticket type</option>
+                    <option value="standard" data-price="50">Standard - $50</option>
+                    <option value="vip" data-price="100">VIP - $100</option>
+                    <option value="premium" data-price="150">Premium - $150</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="tickets">Number of Tickets:</label>
+                <input type="number" id="tickets" name="tickets" min="1" max="10" required>
+            </div>
+
+            <!-- Payment Section -->
+            <div class="form-group">
+                <label for="payment-method">Payment Method:</label>
+                <select id="payment-method" name="payment-method" required>
+                    <option value="" disabled selected>Select payment method</option>
+                    <option value="credit-card">Credit Card</option>
+                    <option value="paypal">PayPal</option>
+                </select>
+            </div>
+
+            <!-- Credit Card Information (only shown if Credit Card is selected) -->
+            <div id="credit-card-info" class="form-group hidden">
+                <label for="card-number">Card Number:</label>
+                <input type="text" id="card-number" name="card-number" placeholder="1234-5678-9012-3456">
+                <label for="expiry-date">Expiry Date:</label>
+                <input type="text" id="expiry-date" name="expiry-date" placeholder="MM/YY">
+                <label for="cvv">CVV:</label>
+                <input type="text" id="cvv" name="cvv" placeholder="123">
+            </div>
+
+            <!-- PayPal Info (only shown if PayPal is selected) -->
+            <div id="paypal-info" class="form-group hidden">
+                <p>You will be redirected to PayPal for payment.</p>
+            </div>
+
+            <button type="submit">Book Now</button>
+        </form>
+
+        <!-- Confirmation Message -->
+        <div id="confirmation-message" class="hidden">
+            <h2>Booking Confirmed!</h2>
+            <p>Thank you for booking with us, <span id="confirm-name"></span>!</p>
+            <p>You have successfully booked <span id="confirm-tickets"></span> <span id="confirm-ticket-type"></span> tickets for the event on <span id="confirm-date"></span>.</p>
+            <p>Total Price: $<span id="confirm-price"></span></p>
+            <p>Payment Method: <span id="confirm-payment-method"></span></p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('booking-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the form from submitting in the traditional way
+
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const date = document.getElementById('date').value;
+            const tickets = document.getElementById('tickets').value;
+            const ticketTypeElement = document.getElementById('ticket-type');
+            const ticketType = ticketTypeElement.options[ticketTypeElement.selectedIndex].text;
+            const ticketPrice = ticketTypeElement.options[ticketTypeElement.selectedIndex].getAttribute('data-price');
+            const totalPrice = tickets * ticketPrice;
+
+            const paymentMethodElement = document.getElementById('payment-method');
+            const paymentMethod = paymentMethodElement.options[paymentMethodElement.selectedIndex].text;
+
+            // Update confirmation message
+            document.getElementById('confirm-name').textContent = name;
+            document.getElementById('confirm-tickets').textContent = tickets;
+            document.getElementById('confirm-ticket-type').textContent = ticketType;
+            document.getElementById('confirm-date').textContent = date;
+            document.getElementById('confirm-price').textContent = totalPrice;
+            document.getElementById('confirm-payment-method').textContent = paymentMethod;
+
+            // Hide the form and show the confirmation message
+            document.getElementById('booking-form').classList.add('hidden');
+            document.getElementById('confirmation-message').classList.remove('hidden');
+        });
+
+        // Show or hide credit card info based on payment method
+        document.getElementById('payment-method').addEventListener('change', function() {
+            const paymentMethod = this.value;
+            if (paymentMethod === 'credit-card') {
+                document.getElementById('credit-card-info').classList.remove('hidden');
+                document.getElementById('paypal-info').classList.add('hidden');
+            } else if (paymentMethod === 'paypal') {
+                document.getElementById('paypal-info').classList.remove('hidden');
+                document.getElementById('credit-card-info').classList.add('hidden');
+            } else {
+                document.getElementById('credit-card-info').classList.add('hidden');
+                document.getElementById('paypal-info').classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+</html>

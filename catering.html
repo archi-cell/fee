@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catering Options</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        /* Basic Styling */
+        body {
+            background-color: #f0f8ff;
+            font-family: 'Arial', sans-serif;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .catering-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            max-width: 300px;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .card.selected {
+            border: 2px solid #007bff;
+            box-shadow: 0 4px 20px rgba(0, 123, 255, 0.4);
+        }
+
+        .card img {
+            max-width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 15px;
+            text-align: center;
+        }
+
+        .price {
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        /* Add and Proceed Buttons */
+        #addToCartButton, #proceedButton {
+            transition: background-color 0.3s, box-shadow 0.3s;
+            display: block;
+            margin: 20px auto;
+        }
+
+        #addToCartButton:hover, #proceedButton:hover {
+            background-color: #007bff;
+            box-shadow: 0 4px 12px rgba(0, 123, 255, 0.4);
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #28a745;
+            color: white;
+            padding: 16px;
+            border-radius: 5px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out, visibility 0.5s;
+        }
+
+        .toast.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+<h1>Catering Options</h1>
+
+<div class="container">
+    <div class="row catering-container">
+        <div class="col-md-4">
+            <div class="card" onclick="selectCatering(this, 'Buffet', 25)">
+                <img src="https://img.freepik.com/premium-photo/buffet-food-catering-food-party-restaurant-mini-canapes-snacks-appetizers-made-by-aiartificial-intelligence_41969-11904.jpg" alt="Buffet">
+                <div class="card-content">
+                    <h2>Buffet</h2>
+                    <p>Our buffet option offers a wide variety of dishes for your guests, catering to all dietary needs with self-service convenience.</p>
+                    <p class="price">Price: $25 per person</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card" onclick="selectCatering(this, 'Plated Meals', 40)">
+                <img src="https://res.cloudinary.com/hz3gmuqw6/image/upload/c_fill,q_auto,w_750/f_auto/plating-food-phpsUAQLM" alt="Plated Meals">
+                <div class="card-content">
+                    <h2>Plated Meals</h2>
+                    <p>Enjoy our sophisticated plated meals, perfect for formal events, served individually for a fine dining experience.</p>
+                    <p class="price">Price: $40 per person</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card" onclick="selectCatering(this, 'Food Trucks', 'Varies')">
+                <img src="https://media-cdn.tripadvisor.com/media/photo-s/28/ec/5f/0a/our-food-truck-located.jpg" alt="Food Trucks">
+                <div class="card-content">
+                    <h2>Food Trucks</h2>
+                    <p>Add a trendy and fun vibe to your event with our selection of gourmet food trucks, offering a range of cuisines.</p>
+                    <p class="price">Price: Varies</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card" onclick="selectCatering(this, 'Custom Menus', 'Contact for quote')">
+                <img src="https://www.shutterstock.com/image-photo/collage-different-pictures-tasty-food-260nw-260006492.jpg" alt="Custom Menu">
+                <div class="card-content">
+                    <h2>Custom Menus</h2>
+                    <p>Tailor your event's menu to perfection, ensuring your guests enjoy a unique culinary experience catered to your preferences.</p>
+                    <p class="price">Price: Contact for quote</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add to Cart Button -->
+<div class="text-center my-4">
+    <button id="addToCartButton" class="btn btn-primary" onclick="addToCart()">Add to Cart</button>
+</div>
+
+<!-- Proceed Button -->
+<div class="text-center my-4">
+    <button id="proceedButton" class="btn btn-success" onclick="proceedToCart()">Proceed to Cart</button>
+</div>
+
+<!-- Toast Notification -->
+<div class="toast" id="toast">Catering option added to cart!</div>
+
+<script>
+    let selectedCatering = null;
+
+    function selectCatering(card, name, price) {
+        if (!card.classList.contains('selected')) {
+            document.querySelectorAll('.card').forEach(c => c.classList.remove('selected'));
+            card.classList.add('selected');
+
+            selectedCatering = { name: name, price: price };
+            alert(`${name} selected!`);
+        } else {
+            alert('🚫 This catering option is already selected!');
+        }
+    }
+
+    function addToCart() {
+        if (selectedCatering) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.push(selectedCatering);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            showToast('Catering option added to cart!');
+        } else {
+            alert('Please select a catering option first!');
+        }
+    }
+
+    function proceedToCart() {
+        window.location.href = "cart.html";
+    }
+
+    function showToast(message) {
+        const toast = document.getElementById('toast');
+        toast.textContent = message;
+        toast.classList.add('show');
+        setTimeout(() => {
+            toast.classList.remove('show');
+        }, 3000);
+    }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

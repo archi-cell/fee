@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Booking Menu</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="menu.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <h1 class="text-center my-4">Event Booking Menu</h1>
+
+        <!-- Event Type -->
+        <div class="card mb-4" data-bs-toggle="tooltip" data-bs-placement="top"
+            title="Choose the type of event you are planning.">
+            <div class="card-header">
+                Event Type
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">What Type of Event?</h5>
+                <p class="card-text">Select the type of event you're planning, whether it's a wedding, conference, or
+                    party.</p>
+                <button type="button" class="btn btn-primary">
+                    <a href="events.html" class="text-white text-decoration-none">Choose Event</a>
+                </button>
+            </div>
+        </div>
+
+        <!-- Calendar -->
+        <div class="card mb-4" data-bs-toggle="tooltip" data-bs-placement="top"
+            title="Select the date that works best for your event.">
+            <div class="card-header">
+                Select Date
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Select Your Date</h5>
+                <p class="card-text">Choose a date that works best for your event.</p>
+                <button type="button" class="btn btn-primary">
+                    <a href="calendar.html" class="text-white text-decoration-none">Choose Date</a>
+                </button>
+            </div>
+        </div>
+
+        <!-- Venue Selection -->
+        <div class="card mb-4" data-bs-toggle="tooltip" data-bs-placement="top"
+            title="Select a venue that matches your event's theme.">
+            <div class="card-header">
+                Venue Selection
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Choose Your Venue</h5>
+                <p class="card-text">Select from a range of beautiful venues that suit your event.</p>
+                <button type="button" class="btn btn-primary">
+                    <a href="venue.html" class="text-white text-decoration-none">Select Venue</a>
+                </button>
+            </div>
+        </div>
+
+        <!-- Catering Options -->
+        <div class="card mb-4" data-bs-toggle="tooltip" data-bs-placement="top"
+            title="Customize the menu to match your guests' preferences.">
+            <div class="card-header">
+                Catering Options
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Customize Your Menu</h5>
+                <p class="card-text">Choose from a variety of catering options to delight your guests.</p>
+                <button type="button" class="btn btn-primary">
+                    <a href="catering.html" class="text-white text-decoration-none">Choose Catering</a>
+                </button>
+            </div>
+        </div>
+
+        <!-- Weather Option -->
+        <div class="card mb-4" data-bs-toggle="tooltip" data-bs-placement="top"
+            title="Check the weather forecast for the event day.">
+            <div class="card-header">
+                Weather Check
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Check the Weather</h5>
+                <p class="card-text">Get a weather forecast to ensure you're prepared for the event day.</p>
+                <button type="button" class="btn btn-primary">
+                    <a href="weather.html" class="text-white text-decoration-none">Check Weather</a>
+                </button>
+            </div>
+        </div>
+
+        <!-- Confirm Booking Button -->
+        <div class="text-center my-4">
+            <button id="confirmBookingBtn" class="btn btn-success btn-lg" data-bs-toggle="modal"
+                data-bs-target="#confirmationModal" onclick="confirmBooking()">Confirm Your Booking</button>
+        </div>
+
+    </div>
+
+    <script>
+        function confirmBooking() {
+            alert('Your booking is confirmed!');
+            window.location.href = "thankyou.html"; // Redirect to the Thank You page after confirmation
+        }
+    </script>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+    </script>
+</body>
+
+</html>

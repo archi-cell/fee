@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up - Event Booking</title>
+    <link rel="stylesheet" href="sign.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Sign Up</h1>
+        <form id="signup-form">
+            <label for="full-name">Full Name</label>
+            <input type="text" id="full-name" name="full-name" required />
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required />
+
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" required />
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required />
+
+            <label for="confirm-password">Confirm Password</label>
+            <input
+                type="password"
+                id="confirm-password"
+                name="confirm-password"
+                required
+            />
+
+            <input type="submit" value="Sign Up" />
+
+            <div id="message" class="error"></div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('signup-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            // Assuming form validation is done here
+            // Show success message
+            document.getElementById('message').textContent = 'You have successfully registered!';
+            document.getElementById('message').classList.add('success');
+
+            // Redirect to the home page after a short delay
+            setTimeout(function() {
+                window.location.href = 'index.html'; // Replace 'home.html' with your home page file
+            }, 1000); // 1 seconds delay
+        });
+    </script>
+</body>
+</html>

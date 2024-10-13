@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Event Calendar</title>
+    <link rel="stylesheet" href="calender.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Event Booking Calendar</h1>
+        <p>Select a date to book your event</p>
+      </header>
+      <div class="calendar">
+        <div class="calendar-controls">
+          <button id="prevYear">&laquo;</button>
+          <button id="prevMonth">&lsaquo;</button>
+          <span id="monthYear"></span>
+          <button id="nextMonth">&rsaquo;</button>
+          <button id="nextYear">&raquo;</button>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Sun</th>
+              <th>Mon</th>
+              <th>Tue</th>
+              <th>Wed</th>
+              <th>Thu</th>
+              <th>Fri</th>
+              <th>Sat</th>
+            </tr>
+          </thead>
+          <tbody id="calendarBody">
+            <!-- Calendar days will be injected here -->
+          </tbody>
+        </table>
+      </div>
+      <button id="proceedButton" class="proceed-btn">Proceed</button>
+    </div>
+    <script src="calender.js"></script>
+  </body>
+</html>

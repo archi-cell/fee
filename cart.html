@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Basic Styling */
+        body {
+            background-color: #f0f8ff;
+            font-family: 'Arial', sans-serif;
+        }
+
+        h1 {
+            color: #333;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .cart-container {
+            margin-top: 20px;
+        }
+
+        .empty-cart {
+            font-size: 1.5rem;
+            color: #dc3545;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        /* Cart Item Card Styling */
+        .cart-item {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .cart-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .cart-item h5 {
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        .cart-item p {
+            margin: 5px 0;
+        }
+
+        .payment-container {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+
+        .confirmation-message {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Button Styling */
+        .btn-custom {
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+
+        .btn-custom:hover {
+            background-color: #28a745;
+            box-shadow: 0 4px 12px rgba(40, 167, 69, 0.4);
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .fade-in.show {
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1 class="text-center">Your Cart</h1>
+        <div class="cart-container" id="cartContainer">
+            <!-- Cart items will be dynamically inserted here -->
+        </div>
+
+        <div class="text-center my-4">
+            <button id="payButton" class="btn btn-lg btn-custom btn-success" onclick="showPayment()">Proceed to Payment</button>
+        </div>
+
+        <div class="payment-container" id="paymentContainer">
+            <h3>Payment Details</h3>
+            <p>Total: $<span id="totalAmount"></span></p>
+            <button class="btn btn-lg btn-custom btn-primary" onclick="makePayment()">Pay Now</button>
+        </div>
+
+        <!-- Confirmation Message -->
+        <div class="text-center my-4 fade-in" id="confirmationMessage" style="display: none;">
+            <div class="confirmation-message">
+                <h2>Booking Confirmed!</h2>
+                <p>Your payment has been processed, and your booking is confirmed.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Load Cart from LocalStorage
+        function loadCart() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartContainer = document.getElementById('cartContainer');
+            const totalAmountElement = document.getElementById('totalAmount');
+
+            if (cart.length === 0) {
+                cartContainer.innerHTML = '<p class="empty-cart">Your cart is empty!</p>';
+                document.getElementById('payButton').style.display = 'none';
+                return;
+            }
+
+            let totalAmount = 0;
+            cart.forEach(item => {
+                totalAmount += item.capacity * 10; // Example pricing logic: $10 per person
+
+                const cartItem = document.createElement('div');
+                cartItem.classList.add('cart-item', 'card'); // Add Bootstrap card class
+                cartItem.innerHTML = `
+                    <h5 class="card-header">${item.name}</h5>
+                    <div class="card-body">
+                        <p>Location: ${item.location}</p>
+                        <p>Capacity: ${item.capacity} people</p>
+                        <p>Price: $${item.capacity * 10}</p>
+                    </div>
+                `;
+                cartContainer.appendChild(cartItem);
+            });
+
+            totalAmountElement.textContent = totalAmount;
+        }
+
+        // Show Payment Section
+        function showPayment() {
+            document.getElementById('paymentContainer').style.display = 'block';
+            document.getElementById('payButton').style.display = 'none';
+        }
+
+        // Simulate Payment Process
+        function makePayment() {
+            // Simulate payment success
+            alert('Payment processed successfully!');
+
+            // Clear the cart
+            localStorage.removeItem('cart');
+
+            // Show confirmation message and hide the payment section
+            document.getElementById('paymentContainer').style.display = 'none';
+            const confirmationMessage = document.getElementById('confirmationMessage');
+            confirmationMessage.style.display = 'block';
+            setTimeout(() => confirmationMessage.classList.add('show'), 100);
+        }
+
+        // On page load, populate cart
+        window.onload = loadCart;
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

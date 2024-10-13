@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+  <head> 
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Weather App</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">My Weather App</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Alerts</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  News And Videos
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link ">PRO</a>
+              </li>
+            </ul>
+            <form class="d-flex" role="search">
+              <input id="city" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit" id="submit">Search</button>
+            </form>
+            
+          </div>
+        </div>
+      </nav>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+      <script src="weather.js"></script>
+    <!-- <script>
+      const submit = document.getElementById("submit");
+  
+      submit.addEventListener("click", async () => {
+          const cityValue = document.getElementById("city").value;
+  
+          try {
+              const response = await fetch(https://weather-by-api-ninjas.p.rapidapi.com/v1/weather?city=${cityValue});
+              const data = await response.json();
+              console.log(data,"##inScript");
+              document.getElementById("temp").innerHTML = data.temp;
+              document.getElementById("cloud_pct").innerHTML = data.cloud_pct;
+              document.getElementById("feels_like").innerHTML = data.cloud_pct;
+              document.getElementById("humidity").innerHTML = data.cloud_pct;
+              document.getElementById("min_temp").innerHTML = data.cloud_pct;
+              document.getElementById("max_temp").innerHTML = data.cloud_pct;
+              document.getElementById("wind_speed").innerHTML = data.cloud_pct;
+              document.getElementById("wind_degrees").innerHTML = data.cloud_pct;
+              document.getElementById("sunrise").innerHTML = data.cloud_pct;
+              document.getElementById("sunset").innerHTML = data.cloud_pct;
+          } catch (error) {
+              console.error(error);
+          }
+      });
+  </script> -->
+    <body>
+    
+    <div class="container py-3">
+      <header>
+        <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
+          <a href="/" class="d-flex align-items-center link-body-emphasis text-decoration-none">
+          </a>
+    
+          <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
+          </nav>
+        </div>
+          <h1 class="display-4 fw-normal text-body-emphasis">Weather Forecast </h1>
+      </header>
+    
+      <main>
+        <div class="row row-cols-1 row-cols-md-3 mb-3 text-center"  style="margin: 5px; padding: 5px;">
+          <div class="col">
+            <div class="card rounded-3 shadow-sm border-primary"  style=" background:transparent">
+              <div class="card-header py-3 text-bg-primary border-primary">
+              
+                <h4 class="my-0 fw-normal">Temperatures</h4>
+              </div>
+              <div  class="card-body">
+                <ul class="list-unstyled mt-3 mb-4">
+                  <li>Temperature: <span id="temp"></span></li>
+                  <li>Max Temp:<span id="max_temp"></span></li>
+                  <li>Min Temp: <span id="min_temp"></span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card rounded-3 shadow-sm border-primary" style=" background:transparent">
+              <div class="card-header py-3 text-bg-primary border-primary">
+                <h4 class="my-0 fw-normal">Humidity Info</h4>
+              </div>
+              <div class= "card-body">
+                <ul class="list-unstyled mt-3 mb-4">
+                  <li>cloud PCT: <span id="cloud_pct"></span></li>
+                  <li>feels like: <span id="feels_like"></span></li>
+                  <li>humidity: <span id="humidity"></span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card rounded-3 shadow-sm border-primary" style=" background:transparent">
+              <div class="card-header py-3 text-bg-primary border-primary">
+                <h4 class="my-0 fw-normal">Wind Info</h4>
+              </div>
+              <div class="card-body">
+                <ul  class="list-unstyled mt-3 mb-4">
+                  <li >Wind Speed: <span id="wind_speed"></span></li>
+                  <li>Wind Degree: <span id="wind_degrees"></span></li>
+                  <li>Sunrise Time: <span id="sunrise"></span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+    
+        <h2 class="display-6 text-center mb-4">Weather of other common places</h2>
+    
+        <div class="table-responsive0"  style="margin: 5px; padding: 5px;">
+          <table class="table table-striped table-hover text-center table-bordered"  >
+            <thead>
+              <tr>
+                <th style="width: 34%;"></th>
+                <th style="width: 22%;">cloud Pct</th>
+                <th style="width: 22%;">Feels like</th>
+                <th style="width: 22%;">Humidity</th>
+                <th style="width: 22%;">Max temp</th> 
+                <th style="width: 22%;">Min temp</th>
+                <th style="width: 22%;">Sunrise</th>
+                <th style="width: 22%;">Sunset</th>
+                <th style="width: 22%;">Temp</th>
+                <th style="width: 22%;">Wind degrees</th>
+                <th style="width: 22%;">Wind speed</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row" class="text-start">Florida</th>
+                <td>0</td>
+                <td>26</td>
+                <td>29</td>
+                <td>27</td>
+                <td>27</td>
+                <td>1696900159</td>
+                <td>1696900162</td>
+                <td>27</td>
+                <td>68</td>
+                <td>2.59</td>
+                
+
+              </tr>
+              <tr>
+                <th scope="row" class="text-start">New York</th>
+                <td>0</td>
+                <td>25</td>
+                <td>30</td>
+                <td>30</td>
+                <td>28</td>
+                <td>1689560036</td>
+                <td>1689560046</td>
+                <td>24</td>
+                <td>64</td>
+                <td>56</td>
+               
+              </tr>
+            </tbody>
+    
+            <tbody>
+              <tr>
+                <th scope="row" class="text-start">Boston</th>
+                <td>0</td>
+                <td>21</td>
+                <td>18</td>
+                <td>17</td>
+                <td>28</td>
+                <td>1689660036</td>
+                <td>1674550023</td>
+                <td>21</td>
+                <td>60</td>
+                <td>2</td>
+               
+              </tr>
+              <tr>
+                <th scope="row" class="text-start">London</th>
+                <td>1</td>
+                <td>24</td>
+                <td>28</td>
+                <td>28</td>
+                <td>24</td>
+                <td>1645662134</td>
+                <td>1645662564</td>
+                <td>20</td>
+                <td>55</td>
+                <td>4</td>
+              </tr>
+              <tr>
+                <th scope="row" class="text-start">Los Angeles</th>
+                <td>2</td>
+                <td>21</td>
+                <td>29</td>
+                <td>29</td>
+                <td>20</td>
+                <td>1689553214</td>
+                <td>1689553214</td>
+                <td>27</td>
+                <td>50</td>
+                <td>2.56</td>
+                
+              </tr>
+              <tr>
+                <th scope="row" class="text-start">Italy</th>
+                <td>0</td>
+                <td>22</td>
+                <td>26</td>
+                <td>26</td>
+                <td>25</td>
+                <td>1659881547</td>
+                <td>1659881547</td>
+                <td>25</td>
+                <td>54</td>
+                <td>3.1</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </main>
+    
+      <footer class="pt-4 my-md-5 pt-md-5 border-top">
+        <div class="row">
+          <div class="col-12 col-md">
+          </div>
+          <div class="col-6 col-md"
+            <ul class="list-unstyled text-small">
+              <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Mumbai</a></li>
+              <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Chennai</a></li>
+              <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Ahmedabad</a></li>
+              <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Pune</a></li>
+              <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Surat</a></li>
+              <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Amritsar</a></li>
+            </ul>
+          </div>
+          <div class="col-6 col-md">
+            <h5>Resources</h5>
+            <ul class="list-unstyled text-small">
+              <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Resource</a></li>
+              <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Resource name</a></li>
+              <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Another resource</a></li>
+              <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Final resource</a></li>
+            </ul>
+          </div>
+          <div class="col-6 col-md">
+            <h5>About</h5>
+            <ul class="list-unstyled text-small">
+              <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Team</a></li>
+              <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Locations</a></li>
+              <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Privacy</a></li>
+              <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Terms</a></li>
+            </ul>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+        
+    <body>
+      <style>     
+       body{background-image: url("https://plus.unsplash.com/premium_photo-1668091148044-056cd744e64a?q=80&w=1790&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");}
+      </style>
+    </body>
+    </body>
+</body>
+</html>
